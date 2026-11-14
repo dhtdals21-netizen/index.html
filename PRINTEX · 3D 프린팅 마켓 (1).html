@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PRINTEX · 3D 프린팅 마켓</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#fff;--fg:#111;--mut:#6b6b6b;--acc:#111;--accfg:#fff;--card:#fff;--bd:#e5e5e2;--soft:#f3f3f1;--ok:#16a34a;--bad:#dc2626}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c0c0d;--fg:#f2f2f0;--mut:#9a9a96;--acc:#f2f2f0;--accfg:#111;--card:#151516;--bd:#2a2a2c;--soft:#1a1a1b;--ok:#4ade80;--bad:#f87171}}
+:root[data-theme="dark"]{--bg:#0c0c0d;--fg:#f2f2f0;--mut:#9a9a96;--acc:#f2f2f0;--accfg:#111;--card:#151516;--bd:#2a2a2c;--soft:#1a1a1b;--ok:#4ade80;--bad:#f87171}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 "Noto Sans KR",-apple-system,"Malgun Gothic",sans-serif}
+button{font-family:inherit}
+.in{max-width:1200px;margin:auto;padding:0 20px;display:flex;align-items:center;gap:22px}
+#top{background:#000;color:#fff;position:sticky;top:env(safe-area-inset-top,0px);z-index:6}
+#top .in{min-height:72px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+.logo{font-weight:900;font-size:28px;letter-spacing:-.04em;cursor:pointer;color:#fff}.logo sup{font-size:10px;font-weight:400}
+#tabs{display:flex;gap:8px;flex-wrap:wrap}
+#tabs button{background:none;border:0;color:#cfcfcf;font-size:15px;font-weight:600;padding:8px;cursor:pointer}
+#tabs button.on,#tabs button:hover{color:#fff}
+.srch{margin-left:auto;position:relative;width:min(310px,100%)}
+.srch input{width:100%;border:0;border-radius:3px;padding:10px 38px 10px 12px;background:#fff;color:#111}
+.srch svg{position:absolute;right:11px;top:50%;transform:translateY(-50%)}
+#user{display:flex;align-items:center;gap:4px}
+.ub{background:none;border:0;color:#fff;font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;padding:6px 8px}
+.ub b{font-weight:700}
+.bag{position:relative}.bag i{position:absolute;top:-2px;right:-2px;background:#fff;color:#000;border-radius:50%;width:16px;height:16px;font:700 10px/16px sans-serif;text-align:center;font-style:normal}
+.un{font-size:13px;color:#cfcfcf}
+#sub{border-bottom:1px solid var(--bd)}
+#sub .in{min-height:48px;justify-content:space-between}
+#stabs{display:flex;gap:26px;flex-wrap:wrap}
+#stabs button{background:none;border:0;color:var(--mut);font-size:14px;font-weight:600;padding:12px 0;cursor:pointer;border-bottom:2px solid transparent}
+#stabs button.on{color:var(--fg);border-bottom-color:var(--fg)}
+.tl{font-size:12px;color:var(--mut)}
+main{max-width:1200px;margin:auto;padding:24px 20px 70px}
+.hero{display:grid;grid-template-columns:5fr 7fr;min-height:470px;background:var(--soft)}
+.hl{padding:44px 40px;display:flex;flex-direction:column;justify-content:center}
+.eye{font-size:11px;letter-spacing:.18em;font-weight:700}
+.h1{font-size:clamp(30px,3.6vw,50px);line-height:1.22;font-weight:800;letter-spacing:-.04em;margin:30px 0 18px}
+.hp{color:var(--mut);margin:0 0 30px}
+.cta{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.cta .btn{border-radius:0;padding:16px 26px;display:inline-flex;gap:26px;align-items:center}
+.lnk{background:none;border:0;color:var(--fg);font:inherit;font-weight:700;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.vis{position:relative;background:#1b2023;min-height:300px}
+.vis svg{position:absolute;inset:0;width:100%;height:100%}
+.strip{display:flex;justify-content:space-between;gap:12px;font-size:11px;letter-spacing:.12em;color:var(--mut);padding:14px 0;flex-wrap:wrap}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--bd);margin:18px 0 40px;padding-bottom:26px}
+.feat button{background:none;border:0;border-left:1px solid var(--bd);color:var(--fg);display:flex;gap:14px;align-items:center;justify-content:center;text-align:left;cursor:pointer;padding:6px 10px}
+.feat button:first-child{border-left:0}
+.feat b{display:block;font-size:15px}.feat small{color:var(--mut)}
+.cur{font-size:12px;letter-spacing:.2em;font-weight:700;margin:0 0 14px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+input,select{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--bd);border-radius:6px;padding:8px 11px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.chip{border:1px solid var(--bd);background:var(--card);color:var(--fg);border-radius:999px;padding:3px 12px;font:inherit;font-size:14px;cursor:pointer}
+.chip.on{background:var(--acc);color:var(--accfg);border-color:var(--acc)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--bd);overflow:hidden;display:flex;flex-direction:column}
+.thumb{height:150px;display:grid;place-items:center;font-size:52px;background:var(--soft)}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.info{padding:11px 14px;display:flex;flex-direction:column;gap:3px;flex:1}
+.info small{color:var(--mut)}
+.price{font-weight:800}.price s{color:var(--mut);font-weight:400;font-size:13px}
+.btn{background:var(--acc);color:var(--accfg);border:0;border-radius:4px;padding:8px 13px;font:inherit;font-weight:700;cursor:pointer}
+.btn.sub{background:var(--card);color:var(--fg);border:1px solid var(--bd)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.card .btn{margin:0 14px 14px}
+.box{background:var(--card);border:1px solid var(--bd);padding:18px;margin-bottom:14px;overflow-x:auto}
+.box h2{margin:0 0 10px;font-size:18px}
+.big{font-size:30px;font-weight:800}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;align-items:center}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td,th{padding:6px 8px;border-bottom:1px solid var(--bd);text-align:left;white-space:nowrap}
+.ok{color:var(--ok)}.bad{color:var(--bad)}
+.tag{font-size:12px;border:1px solid var(--bd);border-radius:6px;padding:1px 7px;color:var(--mut)}
+.stat{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:14px}
+.stat div{background:var(--card);border:1px solid var(--bd);padding:10px 12px}.stat b{display:block;font-size:22px}
+.auth{max-width:380px;margin:26px auto}.auth input{width:100%;margin-bottom:10px}.auth .btn{width:100%}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 18px;border-radius:6px;opacity:0;transition:.25s;pointer-events:none;z-index:9}
+#toast.show{opacity:1}
+.note{color:var(--mut);font-size:13px}
+.bidrow{display:flex;gap:6px;padding:0 14px 14px}.bidrow input{flex:1;min-width:0}.card .bidrow .btn{margin:0}.cd{font-weight:700;font-variant-numeric:tabular-nums}
+[hidden]{display:none!important}
+@media(max-width:800px){.hero{grid-template-columns:1fr}.hl{padding:32px 22px}.vis{min-height:300px}.feat{grid-template-columns:1fr;gap:14px}.feat button{border-left:0;justify-content:flex-start}#sub .in{flex-wrap:wrap}.srch{order:5;width:100%;margin-left:0}}
+</style>
+</head>
+<body>
+<div id="wrap">
+<header id="top"><div class="in">
+<a class="logo" data-go="market">PRINTEX<sup>®</sup></a>
+<nav id="tabs"></nav>
+<div class="srch"><input id="q" type="search" placeholder="어떤 상품을 찾고 있나요?"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></div>
+<div id="user"></div>
+</div></header>
+<div id="sub"><div class="in"><nav id="stabs"></nav><span class="tl">아이디어에서 오브제까지, PRINTEX</span></div></div>
+<main>
+<section id="market">
+<div class="hero"><div class="hl"><div class="eye">A NEW DIMENSION OF YOUR EVERYDAY</div>
+<h1 class="h1">상상을 출력하다.<br>취향을 소유하다.</h1>
+<p class="hp">작은 아이디어가 일상의 오브제가 되는 곳.<br>3D 프린팅으로 만들어진 새로운 취향을 만나보세요.</p>
+<div class="cta"><button class="btn" data-go="market" data-sc="1">마켓 둘러보기 <svg width="18" height="14" viewBox="0 0 24 18" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 9h21M15 2l7 7-7 7"/></svg></button><button class="lnk" data-go="print">직접 만들어보기 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 19L19 5M8 5h11v11"/></svg></button></div></div>
+<div class="vis"><svg viewBox="0 0 800 530" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#171c1f"/><stop offset="1" stop-color="#252d31"/></linearGradient><linearGradient id="sh" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".30"/><stop offset=".4" stop-color="#fff" stop-opacity=".14"/><stop offset="1" stop-color="#000" stop-opacity=".38"/></linearGradient></defs><rect width="800" height="530" fill="url(#bg)"/><rect x="250" y="400" width="550" height="130" fill="#2c343a"/><rect x="250" y="400" width="550" height="4" fill="#3b454c"/><clipPath id="c1"><path d="M357.0,140.0 Q361.0,180.0 365.0,200.0 Q369.0,220.0 367.5,237.5 Q366.0,255.0 374.0,275.0 Q382.0,295.0 389.5,315.0 Q397.0,335.0 391.0,352.5 Q385.0,370.0 383.0,385.0 L381.0,400.0 L289.0,400.0 Q285.0,370.0 279.0,352.5 Q273.0,335.0 280.5,315.0 Q288.0,295.0 296.0,275.0 Q304.0,255.0 302.5,237.5 Q301.0,220.0 305.0,200.0 Q309.0,180.0 311.0,160.0 L313.0,140.0 Z"/></clipPath><path d="M357.0,140.0 Q361.0,180.0 365.0,200.0 Q369.0,220.0 367.5,237.5 Q366.0,255.0 374.0,275.0 Q382.0,295.0 389.5,315.0 Q397.0,335.0 391.0,352.5 Q385.0,370.0 383.0,385.0 L381.0,400.0 L289.0,400.0 Q285.0,370.0 279.0,352.5 Q273.0,335.0 280.5,315.0 Q288.0,295.0 296.0,275.0 Q304.0,255.0 302.5,237.5 Q301.0,220.0 305.0,200.0 Q309.0,180.0 311.0,160.0 L313.0,140.0 Z" fill="#e8dfc9"/><g clip-path="url(#c1)"><g stroke="#000" stroke-opacity=".16" stroke-width="2.2"><path d="M268.2,140 L268.2,400"/><path d="M277.8,140 L277.8,400"/><path d="M287.3,140 L287.3,400"/><path d="M296.8,140 L296.8,400"/><path d="M306.4,140 L306.4,400"/><path d="M315.9,140 L315.9,400"/><path d="M325.5,140 L325.5,400"/><path d="M335.0,140 L335.0,400"/><path d="M344.5,140 L344.5,400"/><path d="M354.1,140 L354.1,400"/><path d="M363.6,140 L363.6,400"/><path d="M373.2,140 L373.2,400"/><path d="M382.7,140 L382.7,400"/><path d="M392.2,140 L392.2,400"/><path d="M401.8,140 L401.8,400"/></g><rect x="273" y="140" width="124" height="260" fill="url(#sh)"/></g><ellipse cx="335" cy="140" rx="22" ry="5" fill="#000" fill-opacity=".25"/><clipPath id="c2"><path d="M508.0,235.0 Q510.0,262.0 516.0,281.0 Q522.0,300.0 528.0,320.0 Q534.0,340.0 531.0,357.5 Q528.0,375.0 524.0,387.5 L520.0,400.0 L420.0,400.0 Q412.0,375.0 409.0,357.5 Q406.0,340.0 412.0,320.0 Q418.0,300.0 424.0,281.0 Q430.0,262.0 431.0,248.5 L432.0,235.0 Z"/></clipPath><path d="M508.0,235.0 Q510.0,262.0 516.0,281.0 Q522.0,300.0 528.0,320.0 Q534.0,340.0 531.0,357.5 Q528.0,375.0 524.0,387.5 L520.0,400.0 L420.0,400.0 Q412.0,375.0 409.0,357.5 Q406.0,340.0 412.0,320.0 Q418.0,300.0 424.0,281.0 Q430.0,262.0 431.0,248.5 L432.0,235.0 Z" fill="#8c8175"/><g clip-path="url(#c2)"><g stroke="#000" stroke-opacity=".16" stroke-width="2.2"><path d="M214,235 L284,400"/><path d="M230,235 L300,400"/><path d="M246,235 L316,400"/><path d="M262,235 L332,400"/><path d="M278,235 L348,400"/><path d="M294,235 L364,400"/><path d="M310,235 L380,400"/><path d="M326,235 L396,400"/><path d="M342,235 L412,400"/><path d="M358,235 L428,400"/><path d="M374,235 L444,400"/><path d="M390,235 L460,400"/><path d="M406,235 L476,400"/><path d="M422,235 L492,400"/><path d="M438,235 L508,400"/><path d="M454,235 L524,400"/><path d="M470,235 L540,400"/><path d="M486,235 L556,400"/><path d="M502,235 L572,400"/><path d="M518,235 L588,400"/><path d="M534,235 L604,400"/><path d="M550,235 L620,400"/></g><rect x="406" y="235" width="128" height="165" fill="url(#sh)"/></g><ellipse cx="470" cy="235" rx="38" ry="5" fill="#000" fill-opacity=".25"/><polygon points="545,372 578,334 628,326 670,350 674,392 642,400 572,400" fill="#ece6d8"/><g stroke="#000" stroke-opacity=".14" stroke-width="2" fill="none"><path d="M578,334 L590,372 L572,400 M590,372 L642,380 L674,392 M628,326 L642,380 M670,350 L642,380"/></g><polygon points="545,372 578,334 628,326 670,350 674,392 642,400 572,400" fill="url(#sh)"/><g font-family="Consolas,monospace" font-size="11" font-weight="700" letter-spacing="2" fill="#fff"><text x="28" y="500">FORM FOLLOWS IMAGINATION.</text><text x="772" y="500" text-anchor="end">PRINTEX OBJECTS — 01</text></g></svg></div></div>
+<div class="strip"><span>DESIGNED BY CREATORS. PRINTED FOR YOU.</span><span>당신의 일상에, 새로운 차원.</span></div>
+<div class="feat">
+<button data-go="market" data-sc="1"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5L12 12l8-4.5M12 12v9"/></svg><span><b>메이커의 취향을 한곳에</b><small>출력물부터 공식 굿즈까지</small></span></button>
+<button data-go="wallet"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="1.5"/><path d="M3 10h18M16 15h2"/><path d="M5 6l11-3v3"/></svg><span><b>하나의 포인트 지갑</b><small>구매 · 쿠폰 · 기프트카드</small></span></button>
+<button data-go="print"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M4 9h16M12 12v5M9.5 15l2.5 2.5 2.5-2.5"/></svg><span><b>내 파일로 맞춤 제작</b><small>견적부터 출력, 배송까지</small></span></button></div>
+<h2 class="cur" id="cur">CURATED OBJECTS</h2>
+<div class="tools"><select id="sort"><option value="rec">추천순</option><option value="new">최신순</option><option value="lo">낮은 가격순</option><option value="hi">높은 가격순</option></select><select id="cps" hidden></select></div>
+<div class="chips" id="chips"></div><div class="grid" id="grid"></div></section>
+<section id="auction" hidden><h2 class="cur">AUCTION</h2>
+<p class="note">입찰 금액은 포인트로 먼저 보관되고, 더 높은 입찰이 들어오면 자동으로 환급됩니다. 종료 30초 전에 입찰하면 시간이 30초 연장됩니다.</p>
+<div class="grid" id="auGrid"></div>
+<div class="box" id="auMyBox" style="margin-top:18px" hidden><h2>내 입찰 현황</h2><table id="auMy"></table></div></section>
+
+<section id="login" hidden><div class="box auth"><h2 id="aT">로그인</h2>
+<input id="ae" type="email" placeholder="이메일(아이디)" autocomplete="email">
+<input id="ap" type="password" placeholder="비밀번호 (8자 이상)" autocomplete="current-password">
+<input id="an" placeholder="닉네임" hidden>
+<button class="btn" id="aB">로그인</button>
+<p class="row"><button class="btn sub" id="aS">회원가입으로 전환</button></p></div></section>
+
+<section id="wallet" hidden>
+<div class="box"><h2>내 포인트</h2><div class="big"><span id="bal2">0</span> P</div></div>
+<div class="box"><h2>충전 요청</h2><div class="row" id="amts"></div><button class="btn" id="reqBtn">충전 요청하기</button>
+<p class="note">관리자가 입금을 확인하고 승인하면 포인트가 지급됩니다.</p><table id="reqTbl"></table></div>
+<div class="box"><h2>거래 내역</h2><table id="txTbl"></table></div></section>
+
+<section id="gift" hidden><div class="box"><h2>기프트카드 등록</h2><div class="row"><input id="gcIn" placeholder="XXXX-XXXX-XXXX"><button class="btn" id="gcBtn">등록</button></div></div>
+<div class="box"><h2>등록한 기프트카드</h2><table id="gcTbl"></table></div></section>
+
+<section id="coupon" hidden>
+<div class="box"><h2>쿠폰 등록</h2><div class="row"><input id="cpIn" placeholder="쿠폰 코드"><button class="btn" id="cpBtn">등록</button></div>
+<p class="note">할인 쿠폰은 마켓 화면의 쿠폰 선택에서 적용합니다. 포인트 쿠폰은 등록 즉시 지급됩니다.</p></div>
+<div class="box"><h2>내 쿠폰</h2><table id="mcTbl"></table></div></section>
+
+<section id="print" hidden><div class="box"><h2>3D 출력 견적 요청</h2>
+<div class="row"><input id="pf" type="file" accept=".stl,.obj,.3mf"></div>
+<div class="row"><select id="mat"><option value="500">PLA</option><option value="700">PETG</option><option value="1000">ABS</option><option value="1800">레진</option></select>
+<select id="col"><option>흰색</option><option>검정</option><option>회색</option><option>빨강</option><option>파랑</option></select>
+<label>수량 <input id="qty" type="number" min="1" value="1" style="width:80px"></label>
+<label>크기(cm) <input id="size" type="number" min="1" value="5" style="width:80px"></label></div>
+<p>예상 견적: <b id="est">0</b> P <span class="note">(재료 단가 × 크기 × 수량, 판매자 견적 전 참고용)</span></p>
+<button class="btn" id="estBtn">견적 요청 보내기</button></div></section>
+
+<section id="orders" hidden><div class="box"><h2>주문 내역</h2><table id="ordTbl"></table></div></section>
+
+<section id="admin" hidden>
+<nav id="atabs" class="row"></nav>
+<div id="a_home"><div class="stat" id="stat"></div>
+<div class="box"><h2>충전 승인 대기</h2><table id="aReq"></table></div>
+<div class="box"><h2>출력 견적 요청</h2><table id="aOrd"></table></div></div>
+<div id="a_prd"><div class="box"><h2 id="pfT">상품 등록</h2>
+<div class="row"><input id="pn" placeholder="상품명"><select id="pc"></select><input id="pp" type="number" min="0" placeholder="가격(P)" style="width:120px"><input id="ps" type="number" min="0" placeholder="재고" style="width:90px"></div>
+<div class="row"><input id="pi" type="file" accept="image/*"><span class="note" id="pim">이미지 없음(400KB 이하)</span></div>
+<div class="row"><button class="btn" id="pSave">저장</button><button class="btn sub" id="pCancel">초기화</button></div></div>
+<div class="box"><h2>상품 목록</h2><table id="aPrd"></table></div></div>
+<div id="a_usr"><div class="box"><h2>포인트 조정</h2><div class="row"><select id="adU"></select><input id="adA" type="number" placeholder="±금액(P)" style="width:130px"><input id="adR" placeholder="사유"><button class="btn" id="adB">적용</button></div></div>
+<div class="box"><h2>회원 관리</h2><table id="aUsr"></table></div></div>
+<div id="a_cp"><div class="box"><h2>쿠폰 발행</h2><div class="row"><input id="cc" placeholder="코드(비우면 자동)"><select id="ct"><option value="fix">정액 할인(P)</option><option value="pct">정률 할인(%)</option><option value="pt">포인트 지급(P)</option></select><input id="cv" type="number" min="1" placeholder="값" style="width:90px"><input id="cm" type="number" min="0" placeholder="최소 구매" style="width:110px"><button class="btn" id="cB">발행</button></div></div>
+<div class="box"><h2>쿠폰 목록</h2><table id="aCp"></table></div></div>
+<div id="a_gc"><div class="box"><h2>기프트카드 발행</h2><div class="row"><input id="ga" type="number" min="100" placeholder="금액(P)" style="width:130px"><input id="gn" type="number" min="1" max="20" value="1" style="width:80px"><button class="btn" id="gB">발행</button></div></div>
+<div class="box"><h2>기프트카드 목록</h2><table id="aGc"></table></div></div>
+<div id="a_au"><div class="box"><h2>경매 등록</h2>
+<div class="row"><input id="aun" placeholder="상품명"><select id="auc"></select><input id="aus" type="number" min="100" placeholder="시작가(P)" style="width:120px"><input id="aui" type="number" min="1" placeholder="입찰 단위(P)" style="width:120px"><input id="aum" type="number" min="1" max="10080" placeholder="진행 시간(분)" style="width:130px"></div>
+<div class="row"><input id="ai" type="file" accept="image/*"><span class="note" id="aim">이미지 없음(400KB 이하)</span><button class="btn" id="auB">경매 시작</button></div></div>
+<div class="box"><h2>경매 목록</h2><table id="aAu"></table></div></div>
+<div id="a_log"><div class="box"><h2>관리자 작업 기록</h2><table id="aLog"></table></div></div>
+</section>
+</main></div>
+<div id="toast"></div>
+<script>
+const cats=["피규어","생활용품","부품","키캡","장난감","인테리어","굿즈"];
+const P=[["🗿","레트로 피규어",0,12000,5],["🧩","수납 트레이",1,6500,12],["⚙️","기어 부품 세트",2,9000,8],["⌨️","로우프로파일 키캡",3,15000,6],["🚗","미니 장난감 자동차",4,5000,20],["🪴","기하학 화분",5,8500,9],["🔑","PRINTEX 키링",6,3000,40],["📱","휴대폰 거치대",1,7000,15]].map((a,i)=>({id:i,e:a[0],img:"",n:a[1],c:cats[a[2]],p:a[3],s:a[4],on:true}));
+const S={me:null,cat:"전체",amt:10000,mode:"in",tab:"market",at:"home",edit:null,img:"",show:{},
+ users:[{e:"admin@printex.com",p:"pon21032",n:"관리자",r:"admin",b:0,sus:false}],tx:[],req:[],ord:[],log:[],cp:[],mc:[],gc:[],au:[],auv:"live",aimg:""};
+const $=id=>document.getElementById(id),f=n=>n.toLocaleString("ko-KR"),esc=t=>String(t).replace(/[<>&"']/g,"");
+const now=()=>new Date().toLocaleTimeString("ko-KR",{hour:"2-digit",minute:"2-digit"});
+const isA=()=>S.me&&S.me.r==="admin";
+const toast=m=>{const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove("show"),2400)};
+const L=m=>S.log.unshift({t:now(),m});
+const TX=(e,t,a,d)=>S.tx.unshift({e,t,a,d});
+const gen=n=>{const A="ABCDEFGHJKLMNPQRSTUVWXYZ23456789",r=crypto.getRandomValues(new Uint8Array(n));return[...r].map(x=>A[x%A.length]).join("")};
+const gcode=()=>gen(12).replace(/(.{4})(.{4})(.{4})/,"$1-$2-$3");
+const remain=ms=>{if(ms<=0)return"종료";const t=Math.floor(ms/1000),d=Math.floor(t/86400),h=Math.floor(t%86400/3600),m=Math.floor(t%3600/60),c=t%60,q=n=>String(n).padStart(2,"0");return d?`${d}일 ${h}시간`:`${q(h)}:${q(m)}:${q(c)}`};
+const hi=a=>a.bids[a.bids.length-1],curP=a=>a.bids.length?hi(a).a:a.start,minb=a=>a.bids.length?hi(a).a+a.inc:a.start,mask=n=>String(n).slice(0,1)+"**";
+(()=>{const T=Date.now();S.au.push({id:0,n:"스파이럴 화병 (한정판)",e:"🏺",img:"",c:"인테리어",start:20000,inc:1000,end:T+3*3600e3,bids:[{u:"seed1",un:"메이커",a:23000,t:T-60000}],st:"live"},{id:1,n:"드래곤 피규어 (대형)",e:"🐉",img:"",c:"피규어",start:30000,inc:2000,end:T+26*3600e3,bids:[],st:"live"},{id:2,n:"커스텀 키캡 세트",e:"⌨️",img:"",c:"키캡",start:10000,inc:500,end:T+20*60e3,bids:[{u:"seed2",un:"키보드덕후",a:11500,t:T-120000}],st:"live"},{id:3,n:"기어 오브제",e:"⚙️",img:"",c:"인테리어",start:15000,inc:1000,end:T-3600e3,bids:[{u:"seed3",un:"기어맨",a:18000,t:T-4000000}],st:"sold"})})();
+function fin(a){const w=hi(a);if(w){a.st="sold";S.ord.unshift({e:w.u,n:"경매 낙찰 · "+a.n,a:w.a,s:"주문 접수"});L(`경매 종료(낙찰): ${a.n} ${f(w.a)}P`)}else{a.st="unsold";L(`경매 종료(유찰): ${a.n}`)}}
+function auction(){const now=Date.now(),lv=S.auv==="live";
+ const l=S.au.filter(a=>lv?a.st==="live":a.st!=="live").sort((a,b)=>lv?a.end-b.end:b.end-a.end);
+ $("auGrid").innerHTML=l.map(a=>{const on=a.st==="live",w=hi(a),st={sold:"낙찰",unsold:"유찰",cancel:"취소됨"}[a.st];
+  return`<div class="card"><div class="thumb">${a.img?`<img src="${a.img}" alt="">`:a.e}</div><div class="info"><b>${esc(a.n)}</b><small><span class="tag">${esc(a.c)}</span> 입찰 ${a.bids.length}회</small><span class="price">${a.bids.length?(on?"현재가":"낙찰가"):"시작가"} ${f(curP(a))} P</span><small>${on?`남은 시간 <span class="cd" data-end="${a.end}">${remain(a.end-now)}</span>`:st}${w?` · ${on?"최고 입찰":"낙찰"} ${esc(mask(w.un))}`:""}</small></div>${on?`<div class="bidrow"><input id="bi${a.id}" type="number" min="1" placeholder="${f(minb(a))}P 이상"><button class="btn" data-bid="${a.id}">입찰</button></div>`:""}</div>`}).join("")||'<p class="note">표시할 경매가 없습니다.</p>';
+ const my=S.me?S.au.filter(a=>a.bids.some(b=>b.u===S.me.e)):[];$("auMyBox").hidden=!my.length;
+ $("auMy").innerHTML="<tr><th>경매</th><th>내 입찰가</th><th>상태</th></tr>"+my.map(a=>{const mb=[...a.bids].reverse().find(b=>b.u===S.me.e),me=hi(a)&&hi(a).u===S.me.e;return`<tr><td>${esc(a.n)}</td><td>${f(mb.a)}P</td><td>${a.st==="live"?(me?'<span class="ok">최고가 입찰 중</span>':'<span class="bad">밀림(환급됨)</span>'):a.st==="sold"?(me?'<span class="ok">낙찰 (주문 내역 확인)</span>':"낙찰 실패"):"경매 취소(환급)"}</td></tr>`}).join("")}
+$("auGrid").onclick=e=>{const id=e.target.dataset.bid;if(id===undefined)return;const a=S.au[+id];
+ if(!S.me){toast("입찰하려면 로그인하세요.");return go("login")}
+ if(isA())return toast("관리자 계정은 입찰할 수 없습니다.");
+ if(a.st!=="live"||a.end<=Date.now())return toast("종료된 경매입니다.");
+ const w=hi(a);if(w&&w.u===S.me.e)return toast("이미 최고가 입찰자입니다.");
+ const raw=$("bi"+id).value,amt=raw===""?minb(a):Math.trunc(+raw);
+ if(!(amt>=minb(a)))return toast(`최소 입찰가는 ${f(minb(a))}P입니다.`);
+ if(S.me.b<amt)return toast("포인트가 부족합니다. 지갑에서 충전을 요청하세요.");
+ if(w){const pu=S.users.find(x=>x.e===w.u);if(pu){pu.b+=w.a;TX(pu.e,"경매 환급",w.a,"입찰 환급 · "+a.n)}}
+ S.me.b-=amt;TX(S.me.e,"경매 입찰",-amt,a.n);a.bids.push({u:S.me.e,un:S.me.n,a:amt,t:Date.now()});
+ if(a.end-Date.now()<30000)a.end+=30000;toast(`${f(amt)}P로 입찰했습니다.`);render()};
+function adminAu(){if(!isA())return;$("auc").innerHTML=cats.map(c=>`<option>${c}</option>`).join("");
+ $("aAu").innerHTML="<tr><th></th><th>경매</th><th>현재가</th><th>입찰</th><th>상태</th><th></th></tr>"+(S.au.map(a=>{const on=a.st==="live";return`<tr><td>${a.img?`<img src="${a.img}" alt="" width="34" height="34" style="object-fit:cover;border-radius:6px">`:a.e}</td><td>${esc(a.n)}</td><td>${f(curP(a))}P</td><td>${a.bids.length}</td><td>${on?`<span class="cd" data-end="${a.end}">${remain(a.end-Date.now())}</span>`:{sold:"낙찰",unsold:"유찰",cancel:"취소됨"}[a.st]}</td><td>${on?`<button class="btn sub" data-auc="${a.id}">경매 취소</button>`:""}</td></tr>`}).join("")||'<tr><td colspan="6" class="note">경매가 없습니다.</td></tr>')}
+$("ai").onchange=e=>{const fl=e.target.files[0];if(!fl)return;if(fl.size>4e5){e.target.value="";return toast("이미지는 400KB 이하만 가능합니다.")}const r=new FileReader();r.onload=()=>{S.aimg=r.result;$("aim").textContent=fl.name};r.readAsDataURL(fl)};
+$("auB").onclick=()=>{const n=$("aun").value.trim(),sp=Math.trunc(+$("aus").value),inc=Math.trunc(+$("aui").value),mi=Math.trunc(+$("aum").value);
+ if(!n||!(sp>=100)||!(inc>=1)||!(mi>=1&&mi<=10080))return toast("상품명, 시작가(100P 이상), 입찰 단위, 진행 시간(1~10080분)을 확인하세요.");
+ S.au.push({id:S.au.length,n,e:"🏺",img:S.aimg,c:$("auc").value,start:sp,inc,end:Date.now()+mi*60000,bids:[],st:"live"});L(`경매 등록: ${n} (시작가 ${f(sp)}P)`);
+ ["aun","aus","aui","aum","ai"].forEach(i=>$(i).value="");S.aimg="";$("aim").textContent="이미지 없음(400KB 이하)";toast("경매를 시작했습니다.");render()};
+setInterval(()=>{const t=Date.now();let ch=false;S.au.forEach(a=>{if(a.st==="live"&&a.end<=t){fin(a);ch=true}});if(ch)render();else document.querySelectorAll("[data-end]").forEach(el=>{el.textContent=remain(+el.dataset.end-t)})},1000);
+function go(t){if(["wallet","gift","orders","coupon","print"].includes(t)&&!S.me){toast("로그인이 필요합니다.");t="login"}if(t==="admin"&&!isA())t="market";S.tab=t;render();scrollTo(0,0)}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-go],[data-x]");if(!b)return;const x=b.dataset.x,g=b.dataset.go;
+ if(x==="out"){S.me=null;toast("로그아웃되었습니다.");return go("market")}
+ if(x==="in")return go("login");
+ if(g==="market"){S.cat="전체";go("market");if(b.dataset.sc)$("cur").scrollIntoView({behavior:"smooth"});return}
+ if(g==="goods"){S.cat="굿즈";return go("market")}
+ if(g.startsWith("sort:")){$("sort").value=g.slice(5);return go("market")}
+ if(g.startsWith("auv:")){S.auv=g.slice(4);return go("auction")}
+ if(g==="auction")S.auv="live";
+ go(g)});
+const ICON={w:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><rect x="3" y="6" width="18" height="14" rx="1.5"/><path d="M3 10h18M16 15h2M5 6l11-3v3"/></svg>',b:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 016 0v2"/></svg>'};
+function chrome(){
+ const tabs=[["market","마켓"],["print","출력 서비스"],["auction","경매"],["goods","공식 굿즈"]];if(isA())tabs.push(["admin","관리자"]);
+ const on=k=>k==="goods"?S.tab==="market"&&S.cat==="굿즈":k==="market"?S.tab==="market"&&S.cat!=="굿즈":S.tab===k;
+ $("tabs").innerHTML=tabs.map(x=>`<button data-go="${x[0]}" class="${on(x[0])?"on":""}">${x[1]}</button>`).join("");
+ const acc=["wallet","gift","coupon","orders"].includes(S.tab),cur=$("sort").value;
+ const st=S.tab==="market"?[["sort:rec","추천"],["sort:new","새로운 출력물"],["auction","진행 중인 경매"]]:acc?[["wallet","포인트 지갑"],["gift","기프트카드"],["coupon","쿠폰"],["orders","주문 내역"]]:S.tab==="auction"?[["auv:live","진행 중인 경매"],["auv:end","종료된 경매"]]:[];
+ $("stabs").innerHTML=st.map(x=>`<button data-go="${x[0]}" class="${(x[0]==="sort:"+cur&&S.tab==="market"||x[0]===S.tab||x[0]==="auv:"+S.auv&&S.tab==="auction")?"on":""}">${x[1]}</button>`).join("");
+ const n=S.me?S.ord.filter(o=>o.e===S.me.e).length:0;
+ $("user").innerHTML=`<button class="ub" data-go="wallet">${ICON.w}포인트 지갑${S.me?` <b>${f(S.me.b)}P</b>`:""}</button><button class="ub bag" data-go="orders" aria-label="주문 내역">${ICON.b}<i>${n}</i></button>`+(S.me?`<span class="un">${esc(S.me.n)}</span><button class="ub" data-x="out">로그아웃</button>`:`<button class="ub" data-x="in">로그인</button>`);
+ document.querySelectorAll("main>section").forEach(s=>s.hidden=s.id!==S.tab);
+}
+function auth(){const up=S.mode==="up";$("aT").textContent=up?"회원가입":"로그인";$("aB").textContent=up?"가입하기":"로그인";$("aS").textContent=up?"로그인으로 전환":"회원가입으로 전환";$("an").hidden=!up}
+$("aS").onclick=()=>{S.mode=S.mode==="up"?"in":"up";auth()};
+$("aB").onclick=()=>{const e=$("ae").value.trim().toLowerCase(),p=$("ap").value;
+ if(!/^\S+@\S+\.\S+$/.test(e))return toast("이메일 형식을 확인하세요.");
+ if(S.mode==="up"){const n=$("an").value.trim();if(p.length<8)return toast("비밀번호는 8자 이상이어야 합니다.");if(!n)return toast("닉네임을 입력하세요.");if(S.users.some(u=>u.e===e))return toast("이미 가입된 이메일입니다.");
+  S.me={e,p,n,r:"user",b:10000,sus:false};S.users.push(S.me);TX(e,"충전",10000,"가입 테스트 포인트");toast("가입 완료! 테스트 포인트 10,000P 지급")}
+ else{const u=S.users.find(x=>x.e===e&&x.p===p);if(!u)return toast("이메일 또는 비밀번호가 올바르지 않습니다.");if(u.sus)return toast("정지된 계정입니다. 관리자에게 문의하세요.");S.me=u;toast(u.n+"님 환영합니다.")}
+ $("ap").value="";go(isA()?"admin":"market")};
+const cpPrice=(p,c)=>!c?p:c.t==="fix"?Math.max(0,p-c.v):Math.max(0,Math.floor(p*(100-c.v)/100));
+const myCp=()=>S.me?S.mc.filter(m=>m.e===S.me.e&&!m.used).map(m=>({m,c:S.cp.find(c=>c.code===m.code)})).filter(x=>x.c&&x.c.t!=="pt"):[];
+function market(){
+ $("chips").innerHTML=["전체",...cats].map(c=>`<button class="chip ${c===S.cat?"on":""}" data-c="${c}">${c}</button>`).join("");
+ const q=$("q").value.trim(),so=$("sort").value,sel=$("cps"),cur=sel.value,mc=myCp();
+ sel.hidden=!mc.length;sel.innerHTML='<option value="">쿠폰 선택 안 함</option>'+mc.map(x=>`<option value="${x.c.code}">${esc(x.c.code)} (${x.c.t==="fix"?f(x.c.v)+"P 할인":x.c.v+"% 할인"}${x.c.min?", "+f(x.c.min)+"P 이상":""})</option>`).join("");sel.value=cur;
+ const c=S.cp.find(k=>k.code===sel.value);
+ let l=P.filter(p=>p.on&&(S.cat==="전체"||p.c===S.cat)&&p.n.includes(q));
+ if(so==="lo")l.sort((a,b)=>a.p-b.p);if(so==="hi")l.sort((a,b)=>b.p-a.p);if(so==="new")l.sort((a,b)=>b.id-a.id);
+ $("grid").innerHTML=l.map(p=>{const ok=c&&p.p>=c.min,np=ok?cpPrice(p.p,c):p.p;return`<div class="card"><div class="thumb">${p.img?`<img src="${p.img}" alt="">`:p.e}</div><div class="info"><b>${esc(p.n)}</b><small><span class="tag">${p.c}</span> 재고 ${p.s}</small><span class="price">${ok?`<s>${f(p.p)}</s> `:""}${f(np)} P</span></div><button class="btn" data-b="${p.id}" ${p.s<1?"disabled":""}>${p.s<1?"품절":"구매하기"}</button></div>`}).join("")||'<p class="note">검색 결과가 없습니다.</p>';
+}
+$("chips").onclick=e=>{if(e.target.dataset.c){S.cat=e.target.dataset.c;market()}};
+$("q").oninput=()=>{S.tab==="market"?market():go("market")};$("sort").onchange=render;$("cps").onchange=market;
+$("grid").onclick=e=>{const id=e.target.dataset.b;if(id===undefined)return;const p=P[+id];
+ if(!S.me){toast("구매하려면 로그인하세요.");return go("login")}
+ if(p.s<1)return toast("품절된 상품입니다.");
+ const c=S.cp.find(k=>k.code===$("cps").value);let price=p.p;
+ if(c){if(p.p<c.min)toast(`쿠폰은 ${f(c.min)}P 이상 상품에만 적용됩니다.`);else price=cpPrice(p.p,c)}
+ if(S.me.b<price)return toast("포인트가 부족합니다. 지갑에서 충전을 요청하세요.");
+ const used=c&&price!==p.p||c&&p.p>=c.min;
+ S.me.b-=price;p.s--;TX(S.me.e,"구매",-price,p.n+(used?" (쿠폰 "+c.code+")":""));
+ S.ord.unshift({e:S.me.e,n:p.n,a:price,s:"주문 접수"});
+ if(used){S.mc.find(m=>m.e===S.me.e&&m.code===c.code&&!m.used).used=true;$("cps").value=""}
+ toast(p.n+" 구매 완료");render()};
+function wallet(){if(!S.me)return;
+ $("bal2").textContent=f(S.me.b);
+ $("amts").innerHTML=[5000,10000,30000,50000].map(a=>`<button class="chip ${a===S.amt?"on":""}" data-a="${a}">${f(a)}P</button>`).join("");
+ const mr=S.req.filter(r=>r.e===S.me.e);
+ $("reqTbl").innerHTML="<tr><th>금액</th><th>상태</th></tr>"+(mr.map(r=>`<tr><td>${f(r.a)}P</td><td>${{pending:"승인 대기",done:'<span class="ok">승인 완료</span>',no:'<span class="bad">거절됨</span>'}[r.s]}${r.s==="no"?` <span class="note">(사유: ${esc(r.why)})</span>`:""}</td></tr>`).join("")||'<tr><td colspan="2" class="note">충전 요청이 없습니다.</td></tr>');
+ $("txTbl").innerHTML="<tr><th>유형</th><th>내용</th><th>금액</th></tr>"+(S.tx.filter(x=>x.e===S.me.e).map(x=>`<tr><td>${x.t}</td><td>${esc(x.d)}</td><td class="${x.a>0?"ok":"bad"}">${x.a>0?"+":""}${f(x.a)}P</td></tr>`).join("")||'<tr><td colspan="3" class="note">내역이 없습니다.</td></tr>');
+}
+$("amts").onclick=e=>{if(e.target.dataset.a){S.amt=+e.target.dataset.a;wallet()}};
+$("reqBtn").onclick=()=>{S.req.unshift({e:S.me.e,a:S.amt,s:"pending"});toast("충전 요청이 접수되었습니다.");render()};
+$("gcBtn").onclick=()=>{const c=$("gcIn").value.trim().toUpperCase(),g=S.gc.find(x=>x.code===c);
+ if(!g)return toast("유효하지 않은 기프트카드 코드입니다.");if(g.by)return toast("이미 사용된 기프트카드입니다.");
+ g.by=S.me.e;S.me.b+=g.a;TX(S.me.e,"기프트카드",g.a,"기프트카드 등록");$("gcIn").value="";toast(f(g.a)+"P가 지급되었습니다.");render()};
+$("cpBtn").onclick=()=>{const c=$("cpIn").value.trim().toUpperCase(),k=S.cp.find(x=>x.code===c);
+ if(!k)return toast("유효하지 않은 쿠폰 코드입니다.");if(S.mc.some(m=>m.e===S.me.e&&m.code===c))return toast("이미 등록한 쿠폰입니다.");
+ S.mc.unshift({e:S.me.e,code:c,used:k.t==="pt"});
+ if(k.t==="pt"){S.me.b+=k.v;TX(S.me.e,"쿠폰",k.v,"쿠폰 "+c)}
+ $("cpIn").value="";toast(k.t==="pt"?f(k.v)+"P가 지급되었습니다.":"쿠폰이 등록되었습니다.");render()};
+const cpTxt=c=>c.t==="fix"?f(c.v)+"P 할인":c.t==="pct"?c.v+"% 할인":f(c.v)+"P 지급";
+function coupon(){if(!S.me)return;$("mcTbl").innerHTML="<tr><th>코드</th><th>혜택</th><th>조건</th><th>상태</th></tr>"+(S.mc.filter(m=>m.e===S.me.e).map(m=>{const c=S.cp.find(k=>k.code===m.code);return`<tr><td>${esc(m.code)}</td><td>${cpTxt(c)}</td><td>${c.min?f(c.min)+"P 이상":"-"}</td><td>${m.used?"사용 완료":"사용 가능"}</td></tr>`}).join("")||'<tr><td colspan="4" class="note">등록한 쿠폰이 없습니다.</td></tr>')}
+function gift(){if(!S.me)return;$("gcTbl").innerHTML="<tr><th>내용</th><th>금액</th></tr>"+(S.tx.filter(x=>x.e===S.me.e&&x.t==="기프트카드").map(x=>`<tr><td>${esc(x.d)}</td><td class="ok">+${f(x.a)}P</td></tr>`).join("")||'<tr><td colspan="2" class="note">등록한 기프트카드가 없습니다.</td></tr>')}
+function est(){const v=(+$("mat").value)*(+$("size").value||1)*(+$("qty").value||1);$("est").textContent=f(v);return v}
+["mat","size","qty"].forEach(i=>$(i).oninput=est);
+$("estBtn").onclick=()=>{const v=est(),fl=$("pf").files[0];
+ if(!fl)return toast("3D 파일(STL, OBJ, 3MF)을 선택하세요.");
+ S.ord.unshift({e:S.me.e,n:"출력 · "+fl.name+" · "+$("mat").selectedOptions[0].text+" "+$("col").value+" ×"+$("qty").value,a:v,s:"견적 요청",pr:1});toast("견적 요청을 보냈습니다.");go("orders")};
+function orders(){if(!S.me)return;$("ordTbl").innerHTML="<tr><th>상품</th><th>금액</th><th>상태</th><th></th></tr>"+(S.ord.map((o,i)=>[o,i]).filter(x=>x[0].e===S.me.e).map(([o,i])=>`<tr><td>${esc(o.n)}</td><td>${f(o.a)}P${o.pr&&o.s==="견적 요청"?' <span class="note">(예상)</span>':""}</td><td>${o.s}</td><td>${o.s==="견적 제시"?`<button class="btn" data-qa="${i}">수락·결제</button> <button class="btn sub" data-qr="${i}">거절</button>`:""}</td></tr>`).join("")||'<tr><td colspan="4" class="note">주문 내역이 없습니다.</td></tr>')}
+$("ordTbl").onclick=e=>{const d=e.target.dataset,k=d.qa??d.qr;if(k===undefined)return;const o=S.ord[+k];if(!o||o.s!=="견적 제시"||o.e!==S.me.e)return;
+ if(d.qa!==undefined){if(S.me.b<o.a)return toast("포인트가 부족합니다. 지갑에서 충전을 요청하세요.");S.me.b-=o.a;TX(S.me.e,"구매",-o.a,"출력 견적 결제 · "+o.n);o.s="견적 수락";toast("견적을 수락하고 "+f(o.a)+"P를 결제했습니다.")}
+ else{o.s="견적 거절";toast("견적을 거절했습니다. 관리자가 수정 견적을 보냅니다.")}render()};
+const AT=[["home","현황·충전"],["prd","상품"],["usr","회원"],["cp","쿠폰"],["gc","기프트카드"],["au","경매"],["log","기록"]];
+function admin(){if(!isA())return;
+ $("atabs").innerHTML=AT.map(x=>`<button class="chip ${S.at===x[0]?"on":""}" data-at="${x[0]}">${x[1]}</button>`).join("");
+ AT.forEach(x=>$("a_"+x[0]).hidden=S.at!==x[0]);
+ const pend=S.req.filter(r=>r.s==="pending");
+ $("stat").innerHTML=[["전체 회원",S.users.length],["상품 수",P.length],["충전 대기",pend.length],["주문 수",S.ord.length]].map(x=>`<div>${x[0]}<b>${x[1]}</b></div>`).join("");
+ $("aReq").innerHTML="<tr><th>회원</th><th>금액</th><th>처리</th></tr>"+(pend.map(r=>`<tr><td>${esc(r.e)}</td><td>${f(r.a)}P</td><td><input id="rw${S.req.indexOf(r)}" placeholder="거절 사유(선택)" style="width:170px"> <button class="btn" data-ok="${S.req.indexOf(r)}">승인</button> <button class="btn sub" data-no="${S.req.indexOf(r)}">거절</button></td></tr>`).join("")||'<tr><td colspan="3" class="note">대기 중인 요청이 없습니다.</td></tr>');
+ const po=S.ord.filter(o=>o.pr);
+ $("aOrd").innerHTML="<tr><th>회원</th><th>내용</th><th>금액(예상/견적)</th><th>상태 / 처리</th></tr>"+(po.map(o=>{const i=S.ord.indexOf(o);let act;if(o.s==="견적 요청"||o.s==="견적 거절")act=`${o.s==="견적 거절"?`<span class="bad">고객 거절 (${f(o.a)}P)</span> `:`<span class="note">견적 요청</span> `}<input id="qp${i}" type="number" min="1" value="${o.a}" style="width:110px"> <button class="btn" data-qs="${i}">${o.s==="견적 거절"?"수정 견적 보내기":"견적 보내기"}</button>`;else if(o.s==="견적 제시")act="고객 응답 대기";else act=`<select data-os="${i}">${["견적 수락","제작 중","배송 중","완료"].map(x=>`<option ${x===o.s?"selected":""}>${x}</option>`).join("")}</select>`;return`<tr><td>${esc(o.e)}</td><td>${esc(o.n)}</td><td>${f(o.a)}P</td><td>${act}</td></tr>`}).join("")||'<tr><td colspan="4" class="note">출력 요청이 없습니다.</td></tr>');
+ $("pc").innerHTML=cats.map(c=>`<option>${c}</option>`).join("");
+ $("pfT").textContent=S.edit===null?"상품 등록":"상품 수정";
+ $("aPrd").innerHTML="<tr><th></th><th>상품</th><th>가격</th><th>재고</th><th>노출</th><th></th></tr>"+P.map(p=>`<tr><td>${p.img?`<img src="${p.img}" alt="" width="34" height="34" style="object-fit:cover;border-radius:6px">`:p.e}</td><td>${esc(p.n)}</td><td>${f(p.p)}P</td><td>${p.s}</td><td><button class="chip ${p.on?"on":""}" data-tg="${p.id}">${p.on?"노출":"숨김"}</button></td><td><button class="btn sub" data-ed="${p.id}">수정</button></td></tr>`).join("");
+ $("adU").innerHTML=S.users.map(u=>`<option value="${esc(u.e)}">${esc(u.n)}${u.r==="admin"?" (관리자)":""} (${esc(u.e)})</option>`).join("");
+ $("aUsr").innerHTML="<tr><th>닉네임</th><th>아이디</th><th>비밀번호</th><th>잔액</th><th>상태</th><th></th></tr>"+S.users.map(u=>`<tr><td>${esc(u.n)}</td><td>${esc(u.e)}</td><td>${S.show[u.e]?esc(u.p):"••••••••"} <button class="chip" data-pw="${esc(u.e)}">${S.show[u.e]?"숨김":"보기"}</button></td><td>${f(u.b)}P</td><td class="${u.sus?"bad":"ok"}">${u.r==="admin"?"관리자":u.sus?"정지":"정상"}</td><td>${u.r==="admin"?"":`<button class="btn sub" data-su="${esc(u.e)}">${u.sus?"정지 해제":"계정 정지"}</button>`}</td></tr>`).join("");
+ $("aCp").innerHTML="<tr><th>코드</th><th>혜택</th><th>최소 구매</th><th>등록 수</th></tr>"+(S.cp.map(c=>`<tr><td>${esc(c.code)}</td><td>${cpTxt(c)}</td><td>${c.min?f(c.min)+"P":"-"}</td><td>${S.mc.filter(m=>m.code===c.code).length}</td></tr>`).join("")||'<tr><td colspan="4" class="note">발행한 쿠폰이 없습니다.</td></tr>');
+ $("aGc").innerHTML="<tr><th>코드</th><th>금액</th><th>상태</th></tr>"+(S.gc.map(g=>`<tr><td>${g.code}</td><td>${f(g.a)}P</td><td>${g.by?"사용됨 ("+esc(g.by)+")":"미사용"}</td></tr>`).join("")||'<tr><td colspan="3" class="note">발행한 기프트카드가 없습니다.</td></tr>');
+ $("aLog").innerHTML="<tr><th>시간</th><th>작업</th></tr>"+(S.log.map(l=>`<tr><td>${l.t}</td><td>${esc(l.m)}</td></tr>`).join("")||'<tr><td colspan="2" class="note">기록이 없습니다.</td></tr>');
+}
+$("pi").onchange=e=>{const fl=e.target.files[0];if(!fl)return;if(fl.size>4e5){e.target.value="";return toast("이미지는 400KB 이하만 가능합니다.")}
+ const r=new FileReader();r.onload=()=>{S.img=r.result;$("pim").textContent=fl.name};r.readAsDataURL(fl)};
+const pReset=()=>{S.edit=null;S.img="";["pn","pp","ps","pi"].forEach(i=>$(i).value="");$("pim").textContent="이미지 없음(400KB 이하)";$("pfT").textContent="상품 등록"};
+$("pCancel").onclick=pReset;
+$("pSave").onclick=()=>{const n=$("pn").value.trim(),p=+$("pp").value,s=+$("ps").value;
+ if(!n||$("pp").value===""||p<0||s<0||!Number.isInteger(p)||!Number.isInteger(s))return toast("상품명, 가격, 재고를 올바르게 입력하세요.");
+ if(S.edit===null){P.push({id:P.length,e:"📦",img:S.img,n,c:$("pc").value,p,s,on:true});L(`상품 등록: ${n} (${f(p)}P)`)}
+ else{const x=P[S.edit];if(x.p!==p)L(`가격 변경: ${x.n} ${f(x.p)}P → ${f(p)}P`);Object.assign(x,{n,c:$("pc").value,p,s});if(S.img)x.img=S.img;L(`상품 수정: ${n}`)}
+ pReset();toast("저장되었습니다.");render()};
+$("admin").onchange=e=>{if(e.target.dataset.os!==undefined){S.ord[+e.target.dataset.os].s=e.target.value;L("출력 주문 상태 → "+e.target.value);toast("상태를 변경했습니다.")}};
+$("admin").onclick=e=>{const d=e.target.dataset;
+ if(d.at){S.at=d.at;return admin()}
+ if(d.qs!==undefined){const o=S.ord[+d.qs],v=Math.trunc(+(($("qp"+d.qs)||{}).value));if(!o||!(v>0))return toast("견적 금액을 입력하세요.");o.a=v;o.s="견적 제시";L(`견적 제시: ${o.e} ${f(v)}P`);toast("견적을 보냈습니다.");render();return}
+ if(d.ok!==undefined||d.no!==undefined){const r=S.req[+(d.ok??d.no)];if(r.s!=="pending")return;
+  if(d.ok!==undefined){r.s="done";S.users.find(u=>u.e===r.e).b+=r.a;TX(r.e,"충전",r.a,"관리자 승인");L(`${r.e} 충전 ${f(r.a)}P 승인`)}
+  else{r.s="no";r.why=(($("rw"+d.no)||{}).value||"").trim()||"사유 없음";L(`${r.e} 충전 ${f(r.a)}P 거절 (사유: ${r.why})`)}render()}
+ if(d.tg!==undefined){const p=P[+d.tg];p.on=!p.on;L(`${p.n} ${p.on?"노출":"숨김"}`);render()}
+ if(d.ed!==undefined){const p=P[+d.ed];S.edit=p.id;S.img="";$("pn").value=p.n;$("pc").value=p.c;$("pp").value=p.p;$("ps").value=p.s;$("pfT").textContent="상품 수정";$("pim").textContent=p.img?"현재 이미지 유지(새로 선택하면 교체)":"이미지 없음";scrollTo({top:0,behavior:"smooth"})}
+ if(d.auc!==undefined){const a=S.au[+d.auc];if(a&&a.st==="live"){const w=hi(a);if(w){const pu=S.users.find(x=>x.e===w.u);if(pu){pu.b+=w.a;TX(pu.e,"경매 환급",w.a,"경매 취소 환급 · "+a.n)}}a.st="cancel";L(`경매 취소: ${a.n}`);render()}}
+ if(d.pw){S.show[d.pw]=!S.show[d.pw];admin()}
+ if(d.su){const u=S.users.find(x=>x.e===d.su);u.sus=!u.sus;L(`${u.e} 계정 ${u.sus?"정지":"정지 해제"}`);render()}};
+$("adB").onclick=()=>{const e=$("adU").value,a=Math.trunc(+$("adA").value),r=$("adR").value.trim();
+ const u=S.users.find(x=>x.e===e);if(!u||!a)return toast("회원과 금액을 입력하세요.");if(u.b+a<0)return toast("잔액이 0P 미만이 될 수 없습니다.");
+ u.b+=a;TX(u.e,"관리자 조정",a,r||"관리자 포인트 조정");L(`${u.e} 포인트 ${a>0?"+":""}${f(a)}P 조정${r?" ("+r+")":""}`);$("adA").value="";$("adR").value="";toast("포인트를 조정했습니다.");render()};
+$("cB").onclick=()=>{const code=($("cc").value.trim()||gen(8)).toUpperCase(),v=Math.trunc(+$("cv").value),t=$("ct").value;
+ if(v<1||(t==="pct"&&v>100))return toast("값을 확인하세요.");if(S.cp.some(c=>c.code===code))return toast("이미 있는 코드입니다.");
+ S.cp.unshift({code,t,v,min:Math.max(0,Math.trunc(+$("cm").value))});L("쿠폰 발행: "+code);["cc","cv","cm"].forEach(i=>$(i).value="");toast("쿠폰 "+code+" 발행");render()};
+$("gB").onclick=()=>{const a=Math.trunc(+$("ga").value),n=Math.min(20,Math.max(1,Math.trunc(+$("gn").value)));if(a<100)return toast("금액은 100P 이상이어야 합니다.");
+ for(let i=0;i<n;i++)S.gc.unshift({code:gcode(),a,by:null});L(`기프트카드 ${n}장 발행 (${f(a)}P)`);toast(n+"장 발행했습니다.");render()};
+function render(){chrome();auth();market();wallet();gift();coupon();auction();orders();admin();adminAu();est()}
+render();
+</script>
+</body>
+</html>
